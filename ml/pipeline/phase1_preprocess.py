@@ -69,8 +69,7 @@ def clean_results(results: pd.DataFrame, name_map: dict[str, str]) -> tuple[pd.D
         (results["date"] >= CUTOFF_DATE)
         & (results["tournament"] == "FIFA World Cup")
     )
-    fixtures = results.loc[fixture_mask].copy()
-    fixtures = fixtures.sort_values(["date", "home_team", "away_team"]).reset_index(drop=True)
+    fixtures = results.loc[fixture_mask].copy().reset_index(drop=True)
     fixtures.insert(0, "fixture_id", [f"GS-{index + 1:02d}" for index in range(len(fixtures))])
 
     training_mask = (
